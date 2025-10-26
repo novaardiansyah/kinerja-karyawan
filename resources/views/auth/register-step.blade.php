@@ -195,7 +195,7 @@
               <label for="email" class="form-label fw-semibold">
                 <i class="fas fa-envelope me-2 text-primary"></i>Email*
               </label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="nama@novacorp.com"
+              <input type="email" class="form-control" id="email" name="email" placeholder="nama@novadev.my.id"
                 autocomplete="email" value="{{ old('email') }}">
               @if ($errors->has('email'))
                 <div class="text-danger small mt-1">
