@@ -89,17 +89,19 @@
           </div>
           <h3 class="fw-bold text-primary mb-2">Registrasi Karyawan</h3>
           <p class="text-muted small mb-3">
-              @switch($step)
-                @case(1)
-                  Langkah 1: Data Pribadi
-                  @break
-                @case(2)
-                  Langkah 2: Perusahaan
-                  @break
-                @case(3)
-                  Langkah 3: Keamanan
-                  @break
-              @endswitch
+            @switch($step)
+              @case(1)
+                Langkah 1: Data Pribadi
+              @break
+
+              @case(2)
+                Langkah 2: Perusahaan
+              @break
+
+              @case(3)
+                Langkah 3: Keamanan
+              @break
+            @endswitch
           </p>
 
           <!-- Mobile Progress Steps -->
@@ -130,13 +132,15 @@
             @switch($step)
               @case(1)
                 Langkah 1 dari 3: Informasi Pribadi
-                @break
+              @break
+
               @case(2)
                 Langkah 2 dari 3: Informasi Perusahaan
-                @break
+              @break
+
               @case(3)
                 Langkah 3 dari 3: Keamanan Akun
-                @break
+              @break
             @endswitch
           </p>
         </div>
@@ -159,7 +163,7 @@
         @endif
 
         <!-- Step 1: Personal Information -->
-        @if($step == 1)
+        @if ($step == 1)
           <form method="POST" action="{{ route('auth.register.step1') }}">
             @csrf
 
@@ -195,8 +199,8 @@
               <label for="email" class="form-label fw-semibold">
                 <i class="fas fa-envelope me-2 text-primary"></i>Email*
               </label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="nama@novadev.my.id"
-                autocomplete="email" value="{{ old('email') }}">
+              <input type="email" class="form-control" id="email" name="email"
+                placeholder="nama@novadev.my.id" autocomplete="email" value="{{ old('email') }}">
               @if ($errors->has('email'))
                 <div class="text-danger small mt-1">
                   <i class="fas fa-exclamation-circle"></i> {{ $errors->first('email') }}
@@ -227,7 +231,7 @@
         @endif
 
         <!-- Step 2: Company Information -->
-        @if($step == 2)
+        @if ($step == 2)
           <form method="POST" action="{{ route('auth.register.step2') }}">
             @csrf
 
@@ -237,8 +241,9 @@
               </label>
               <select class="form-select" id="department_id" name="department_id">
                 <option value="">Pilih Departemen</option>
-                @foreach($departments as $department)
-                  <option value="{{ $department->id }}" {{ old('department_id') == $department->id ? 'selected' : '' }}>
+                @foreach ($departments as $department)
+                  <option value="{{ $department->id }}"
+                    {{ old('department_id') == $department->id ? 'selected' : '' }}>
                     {{ $department->name }}
                   </option>
                 @endforeach
@@ -295,7 +300,7 @@
         @endif
 
         <!-- Step 3: Security & Terms -->
-        @if($step == 3)
+        @if ($step == 3)
           <form method="POST" action="{{ route('auth.register.step3') }}">
             @csrf
 
@@ -403,6 +408,7 @@
         padding-bottom: 20px;
       }
     }
+
     .step-indicator {
       display: flex;
       flex-direction: column;
@@ -510,13 +516,15 @@
         border-radius: 15px !important;
       }
 
-      .btn-primary-gradient, .btn-outline-primary {
+      .btn-primary-gradient,
+      .btn-outline-primary {
         padding: 12px 24px !important;
         font-size: 1rem !important;
         border-radius: 12px !important;
       }
 
-      .form-control, .form-select {
+      .form-control,
+      .form-select {
         padding: 12px 16px !important;
         font-size: 0.9rem !important;
         border-radius: 12px !important;
@@ -583,12 +591,14 @@
         border-radius: 12px !important;
       }
 
-      .btn-primary-gradient, .btn-outline-primary {
+      .btn-primary-gradient,
+      .btn-outline-primary {
         padding: 10px 20px !important;
         font-size: 0.9rem !important;
       }
 
-      .form-control, .form-select {
+      .form-control,
+      .form-select {
         padding: 10px 14px !important;
         font-size: 0.85rem !important;
       }
@@ -609,6 +619,7 @@
       .text-center p a {
         margin-left: 5px;
       }
+
       .btn-primary-gradient:active {
         transform: scale(0.98) !important;
         opacity: 0.85 !important;
@@ -621,7 +632,8 @@
         transition: all 0.1s ease !important;
       }
 
-      .btn-primary-gradient:hover, .btn-outline-primary:hover {
+      .btn-primary-gradient:hover,
+      .btn-outline-primary:hover {
         opacity: 0.9 !important;
         transition: all 0.3s ease !important;
       }
@@ -630,71 +642,106 @@
 @endsection
 
 @section('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const departmentSelect = document.getElementById('department_id');
-    const positionSelect = document.getElementById('position_id');
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const departmentSelect = document.getElementById('department_id');
+      const positionSelect = document.getElementById('position_id');
 
-    if (departmentSelect && positionSelect) {
+      if (departmentSelect && positionSelect) {
         departmentSelect.addEventListener('change', function() {
-            const departmentId = this.value;
+          const departmentId = this.value;
 
-            // Reset position select
-            positionSelect.innerHTML = '<option value="">Memuat...</option>';
-            positionSelect.disabled = true;
+          // Reset position select
+          positionSelect.innerHTML = '<option value="">Memuat...</option>';
+          positionSelect.disabled = true;
 
-            if (departmentId) {
-                // Fetch positions via API
-                fetch(`/api/positions/by-department?department_id=${departmentId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        positionSelect.innerHTML = '<option value="">Pilih Posisi</option>';
+          if (departmentId) {
+            // Fetch positions via API
+            fetch(`/api/positions/by-department?department_id=${departmentId}`)
+              .then(response => response.json())
+              .then(data => {
+                positionSelect.innerHTML = '<option value="">Pilih Posisi</option>';
 
-                        if (data.success && data.data.length > 0) {
-                            data.data.forEach(position => {
-                                const option = document.createElement('option');
-                                option.value = position.id;
-                                option.textContent = `${position.name} (${position.level})`;
-                                positionSelect.appendChild(option);
-                            });
-                            positionSelect.disabled = false;
-                        } else {
-                            positionSelect.innerHTML = '<option value="">Tidak ada posisi tersedia</option>';
-                            positionSelect.disabled = true;
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching positions:', error);
-                        positionSelect.innerHTML = '<option value="">Terjadi kesalahan</option>';
-                        positionSelect.disabled = true;
-                    });
-            } else {
-                positionSelect.innerHTML = '<option value="">Pilih departemen terlebih dahulu</option>';
+                if (data.success && data.data.length > 0) {
+                  data.data.forEach(position => {
+                    const option = document.createElement('option');
+                    option.value = position.id;
+                    option.textContent = `${position.name} (${position.level})`;
+                    positionSelect.appendChild(option);
+                  });
+                  positionSelect.disabled = false;
+                } else {
+                  positionSelect.innerHTML = '<option value="">Tidak ada posisi tersedia</option>';
+                  positionSelect.disabled = true;
+                }
+              })
+              .catch(error => {
+                console.error('Error fetching positions:', error);
+                positionSelect.innerHTML = '<option value="">Terjadi kesalahan</option>';
                 positionSelect.disabled = true;
-            }
+              });
+          } else {
+            positionSelect.innerHTML = '<option value="">Pilih departemen terlebih dahulu</option>';
+            positionSelect.disabled = true;
+          }
         });
 
         // Handle form submission validation
         const form = document.querySelector('form[action*="register.step2"]');
         if (form) {
-            form.addEventListener('submit', function(e) {
-                if (!departmentSelect.value) {
-                    e.preventDefault();
-                    alert('Silakan pilih departemen terlebih dahulu');
-                    departmentSelect.focus();
-                    return;
-                }
+          form.addEventListener('submit', function(e) {
+            if (!departmentSelect.value) {
+              e.preventDefault();
+              alert('Silakan pilih departemen terlebih dahulu');
+              departmentSelect.focus();
+              return;
+            }
 
-                if (!positionSelect.value || positionSelect.disabled) {
-                    e.preventDefault();
-                    alert('Silakan pilih posisi/jabatan');
-                    positionSelect.focus();
-                    return;
-                }
-            });
+            if (!positionSelect.value || positionSelect.disabled) {
+              e.preventDefault();
+              alert('Silakan pilih posisi/jabatan');
+              positionSelect.focus();
+              return;
+            }
+          });
         }
-    }
-});
-</script>
-@endsection
+      }
+    });
 
+    const passwordInput = document.getElementById('password');
+    if (passwordInput) {
+      const passwordStrength = document.getElementById('passwordStrength');
+      const passwordHint = document.getElementById('passwordHint');
+
+      passwordInput.addEventListener('input', function() {
+        const password = this.value;
+        let strength = 0;
+        let feedback = '';
+
+        if (password.length >= 8) strength += 25;
+        if (password.match(/[a-z]/)) strength += 25;
+        if (password.match(/[A-Z]/)) strength += 25;
+        if (password.match(/[0-9]/)) strength += 12.5;
+        if (password.match(/[^a-zA-Z0-9]/)) strength += 12.5;
+
+        passwordStrength.style.width = strength + '%';
+
+        if (strength < 25) {
+          passwordStrength.className = 'progress-bar bg-danger';
+          feedback = 'Password sangat lemah';
+        } else if (strength < 50) {
+          passwordStrength.className = 'progress-bar bg-warning';
+          feedback = 'Password lemah';
+        } else if (strength < 75) {
+          passwordStrength.className = 'progress-bar bg-info';
+          feedback = 'Password cukup kuat';
+        } else {
+          passwordStrength.className = 'progress-bar bg-success';
+          feedback = 'Password sangat kuat';
+        }
+
+        passwordHint.textContent = feedback;
+      });
+    }
+  </script>
+@endsection
