@@ -81,7 +81,7 @@
 
     <!-- Right Panel - Registration Form -->
     <div class="col-lg-6 col-md-12">
-      <div class="auth-card p-3 p-lg-5" style="margin: 15px;">
+      <div class="auth-card p-3 p-lg-5" style="margin: 60px 15px 15px 15px;">
         <!-- Mobile Header -->
         <div class="d-lg-none text-center mb-4">
           <div class="logo-main mb-3" style="width: 50px; height: 50px; margin: 0 auto;">
@@ -125,10 +125,7 @@
 
         <!-- Desktop Header -->
         <div class="d-none d-lg-block text-center mb-5">
-          <h2 class="fw-bold mb-2"
-            style="background: var(--secondary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-            Registrasi Karyawan Baru
-          </h2>
+          <h2 class="fw-bold mb-2 text-primary">Registrasi Karyawan Baru</h2>
           <p class="text-muted">
             @switch($step)
               @case(1)
@@ -397,6 +394,16 @@
 
 @section('styles')
   <style>
+    /* Add padding for better scroll experience */
+    body {
+      padding-bottom: 30px;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-bottom: 20px;
+      }
+    }
     .step-indicator {
       display: flex;
       flex-direction: column;
@@ -499,7 +506,7 @@
       }
 
       .auth-card {
-        margin: 30px 8px !important;
+        margin: 15px 8px 15px 8px !important;
         padding: 25px !important;
         border-radius: 15px !important;
       }
@@ -572,7 +579,7 @@
       }
 
       .auth-card {
-        margin: 25px 5px !important;
+        margin: 20px 5px 15px 5px !important;
         padding: 20px !important;
         border-radius: 12px !important;
       }

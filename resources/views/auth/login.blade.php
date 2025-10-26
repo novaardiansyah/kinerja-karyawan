@@ -10,35 +10,49 @@
         <div class="logo-main mb-4">
           <i class="fas fa-chart-line fa-2x text-white"></i>
         </div>
-        <h2 class="display-5 fw-bold mb-4">Sistem Kinerja Karyawan</h2>
-        <p class="lead mb-5">Platform monitoring kinerja dan produktivitas karyawan perusahaan</p>
+        <h2 class="display-5 fw-bold mb-4">Portal Kinerja Karyawan</h2>
+        <p class="lead mb-5">Akses sistem monitoring kinerja perusahaan</p>
 
-        <div class="row text-start">
-          <div class="col-12 mb-4">
-            <ul class="feature-list">
-              <li><i class="fas fa-check-circle"></i> <strong>Monitoring Kehadiran:</strong> Sistem absensi digital karyawan</li>
-              <li><i class="fas fa-chart-bar"></i> <strong>Laporan Kinerja:</strong> Analisis produktivitas karyawan per departemen</li>
-              <li><i class="fas fa-tasks"></i> <strong>Manajemen Tugas:</strong> Monitoring progress tugas karyawan</li>
-              <li><i class="fas fa-calendar-check"></i> <strong>Pengajuan Cuti:</strong> Sistem permohonan cuti online</li>
-              <li><i class="fas fa-users"></i> <strong>Data Karyawan:</strong> Database terpusat informasi karyawan</li>
-              <li><i class="fas fa-file-alt"></i> <strong>Dokumen:</strong> Upload dan management dokumen karyawan</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="mt-5">
-          <div class="row text-center">
-            <div class="col-4">
-              <h3 class="fw-bold">7</h3>
-              <p class="small mb-0">Departemen</p>
-            </div>
-            <div class="col-4">
-              <h3 class="fw-bold">50+</h3>
-              <p class="small mb-0">Total Karyawan</p>
-            </div>
-            <div class="col-4">
-              <h3 class="fw-bold">24/7</h3>
-              <p class="small mb-0">System Monitoring</p>
+        <div class="card border-0 mt-4 login-features-card" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);">
+          <div class="card-body p-4">
+            <h5 class="text-white mb-4"><i class="fas fa-sign-in-alt me-2"></i>Login ke Sistem</h5>
+            <div class="row text-start">
+              <div class="col-12 mb-3">
+                <div class="d-flex align-items-center mb-2">
+                  <div class="rounded-circle bg-white text-primary d-flex align-items-center justify-content-center me-3"
+                    style="width: 40px; height: 40px;">
+                    <i class="fas fa-fingerprint"></i>
+                  </div>
+                  <div>
+                    <strong class="text-white">Absensi Digital</strong>
+                    <p class="small mb-0 text-white-50">Monitoring kehadiran real-time</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 mb-3">
+                <div class="d-flex align-items-center mb-2">
+                  <div class="rounded-circle bg-white text-success d-flex align-items-center justify-content-center me-3"
+                    style="width: 40px; height: 40px;">
+                    <i class="fas fa-chart-line"></i>
+                  </div>
+                  <div>
+                    <strong class="text-white">Laporan Kinerja</strong>
+                    <p class="small mb-0 text-white-50">Analisis produktivitas harian</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="d-flex align-items-center mb-2">
+                  <div class="rounded-circle bg-white text-warning d-flex align-items-center justify-content-center me-3"
+                    style="width: 40px; height: 40px;">
+                    <i class="fas fa-tasks"></i>
+                  </div>
+                  <div>
+                    <strong class="text-white">Manajemen Tugas</strong>
+                    <p class="small mb-0 text-white-50">Tracking progress tugas karyawan</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -47,7 +61,7 @@
 
     <!-- Right Panel - Login Form -->
     <div class="col-lg-6 col-md-12">
-      <div class="auth-card p-3 p-lg-5" style="margin: 15px;">
+      <div class="auth-card p-3 p-lg-5" style="margin: 60px 15px 15px 15px;">
         <!-- Mobile Header -->
         <div class="d-lg-none text-center mb-4">
           <div class="logo-main mb-3" style="width: 50px; height: 50px; margin: 0 auto;">
@@ -59,10 +73,7 @@
 
         <!-- Desktop Header -->
         <div class="d-none d-lg-block text-center mb-5">
-          <h2 class="fw-bold mb-2"
-            style="background: var(--secondary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-            Portal Kinerja
-          </h2>
+          <h2 class="fw-bold mb-2 text-primary">Portal Kinerja</h2>
           <p class="text-muted">Selamat datang kembali! Masuk ke sistem kinerja karyawan</p>
         </div>
 
@@ -177,9 +188,19 @@
 
 @section('styles')
   <style>
+    /* Add padding for better scroll experience */
+    body {
+      padding-bottom: 30px;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-bottom: 20px;
+      }
+    }
     @media (max-width: 768px) {
       .auth-card {
-        margin: 30px 8px !important;
+        margin: 15px 8px 15px 8px !important;
         padding: 25px !important;
         border-radius: 15px !important;
       }
@@ -217,7 +238,7 @@
 
     @media (max-width: 576px) {
       .auth-card {
-        margin: 25px 5px !important;
+        margin: 20px 5px 15px 5px !important;
         padding: 20px !important;
         border-radius: 12px !important;
       }
@@ -252,6 +273,16 @@
         opacity: 0.9 !important;
         transition: all 0.3s ease !important;
       }
+    }
+
+    /* Login Features Card Styles */
+    .login-features-card {
+      transition: all 0.3s ease;
+    }
+
+    .login-features-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
   </style>
 @endsection
