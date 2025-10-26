@@ -603,6 +603,22 @@
       .text-center p a {
         margin-left: 5px;
       }
+      .btn-primary-gradient:active {
+        transform: scale(0.98) !important;
+        opacity: 0.85 !important;
+        transition: all 0.1s ease !important;
+      }
+
+      .btn-outline-primary:active {
+        transform: scale(0.98) !important;
+        opacity: 0.85 !important;
+        transition: all 0.1s ease !important;
+      }
+
+      .btn-primary-gradient:hover, .btn-outline-primary:hover {
+        opacity: 0.9 !important;
+        transition: all 0.3s ease !important;
+      }
     }
   </style>
 @endsection

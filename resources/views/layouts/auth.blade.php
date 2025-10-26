@@ -249,7 +249,7 @@
             background: var(--secondary-gradient);
             border: none;
             border-radius: 16px;
-            color: white;
+            color: white !important;
             font-weight: 600;
             padding: 14px 32px;
             transition: all 0.3s ease;
@@ -261,12 +261,15 @@
         .btn-primary-gradient:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-            color: white;
+            color: white !important;
+            opacity: 0.95;
         }
 
         .btn-primary-gradient:active {
-            transform: translateY(-1px);
+            transform: translateY(-1px) scale(0.98);
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            opacity: 0.9;
+            color: white !important;
         }
 
         .btn-outline-primary {
@@ -279,12 +282,19 @@
             background: transparent;
         }
 
+        .btn-outline-primary:active {
+            transform: scale(0.98);
+            opacity: 0.85;
+            color: white !important;
+        }
+
         .btn-outline-primary:hover {
             background: var(--secondary-gradient);
             border-color: transparent;
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
-            color: white;
+            color: white !important;
+            opacity: 0.95;
         }
 
         /* Social Login Buttons */
@@ -386,6 +396,20 @@
             color: #4facfe;
             margin-right: 0.5rem;
         }
+
+        /* Ensure button text color consistency */
+        .btn-primary-gradient,
+        .btn-primary-gradient:hover,
+        .btn-primary-gradient:active,
+        .btn-primary-gradient:focus {
+            color: white !important;
+        }
+
+        .btn-outline-primary:hover,
+        .btn-outline-primary:active,
+        .btn-outline-primary:focus {
+            color: white !important;
+        }
     </style>
 
     @yield('styles')
@@ -405,6 +429,57 @@
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
+    <!-- Password Toggle Functionality -->
+    <script>
+        // Password toggle functionality
+        function initializePasswordToggles() {
+            // Main password toggle
+            const togglePassword = document.getElementById('togglePassword');
+            if (togglePassword) {
+                togglePassword.addEventListener('click', function() {
+                    const passwordInput = document.getElementById('password');
+                    const eyeIcon = document.getElementById('eyeIcon');
+
+                    if (passwordInput && eyeIcon) {
+                        if (passwordInput.type === 'password') {
+                            passwordInput.type = 'text';
+                            eyeIcon.classList.remove('fa-eye');
+                            eyeIcon.classList.add('fa-eye-slash');
+                        } else {
+                            passwordInput.type = 'password';
+                            eyeIcon.classList.remove('fa-eye-slash');
+                            eyeIcon.classList.add('fa-eye');
+                        }
+                    }
+                });
+            }
+
+            // Confirm password toggle
+            const togglePasswordConfirm = document.getElementById('togglePasswordConfirm');
+            if (togglePasswordConfirm) {
+                togglePasswordConfirm.addEventListener('click', function() {
+                    const passwordConfirmInput = document.getElementById('password_confirmation');
+                    const eyeIconConfirm = document.getElementById('eyeIconConfirm');
+
+                    if (passwordConfirmInput && eyeIconConfirm) {
+                        if (passwordConfirmInput.type === 'password') {
+                            passwordConfirmInput.type = 'text';
+                            eyeIconConfirm.classList.remove('fa-eye');
+                            eyeIconConfirm.classList.add('fa-eye-slash');
+                        } else {
+                            passwordConfirmInput.type = 'password';
+                            eyeIconConfirm.classList.remove('fa-eye-slash');
+                            eyeIconConfirm.classList.add('fa-eye');
+                        }
+                    }
+                });
+            }
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', initializePasswordToggles);
+    </script>
 
     @yield('scripts')
 </body>

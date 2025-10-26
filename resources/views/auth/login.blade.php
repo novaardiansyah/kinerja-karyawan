@@ -240,6 +240,18 @@
       h3 {
         font-size: 1.2rem !important;
       }
+
+      .btn-primary-gradient:active {
+        transform: scale(0.98) !important;
+        opacity: 0.85 !important;
+        transition: all 0.1s ease !important;
+      }
+
+      .btn-primary-gradient:hover {
+        color: white !important;
+        opacity: 0.9 !important;
+        transition: all 0.3s ease !important;
+      }
     }
   </style>
 @endsection
