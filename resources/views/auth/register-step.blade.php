@@ -724,22 +724,27 @@
         if (password.match(/[0-9]/)) strength += 12.5;
         if (password.match(/[^a-zA-Z0-9]/)) strength += 12.5;
 
-        passwordStrength.style.width = strength + '%';
+        let percent = 0;
 
         if (strength < 25) {
+          percent = 25;
           passwordStrength.className = 'progress-bar bg-danger';
           feedback = 'Password sangat lemah';
         } else if (strength < 50) {
+          percent = 50;
           passwordStrength.className = 'progress-bar bg-warning';
           feedback = 'Password lemah';
         } else if (strength < 75) {
-          passwordStrength.className = 'progress-bar bg-info';
+          percent = 75;
+          passwordStrength.className = 'progress-bar bg-success';
           feedback = 'Password cukup kuat';
         } else {
-          passwordStrength.className = 'progress-bar bg-success';
+          percent = 100;
+          passwordStrength.className = 'progress-bar bg-info';
           feedback = 'Password sangat kuat';
         }
 
+        passwordStrength.style.width = percent + '%';
         passwordHint.textContent = feedback;
       });
     }
