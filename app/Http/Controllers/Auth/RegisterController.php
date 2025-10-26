@@ -8,33 +8,104 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 
 class RegisterController extends Controller
 {
     /**
-     * Show the application registration form.
+     * Show the multi-step registration form.
      *
+     * @param int $step
      * @return \Illuminate\View\View
      */
-    public function showRegistrationForm()
+    public function showRegistrationForm($step = 1)
     {
-        return view('auth.register');
+        if ($step < 1 || $step > 3) {
+            return redirect()->route('auth.register', ['step' => 1]);
+        }
+
+        return view('auth.register-step', compact('step'));
     }
 
     /**
-     * Handle a registration request for the application.
+     * Handle step 1 of registration (Personal Information).
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function register(Request $request)
+    public function registerStep1(Request $request)
     {
-        $this->validator($request->all())->validate();
+        $validator = $this->step1Validator($request->all());
 
-        $user = $this->create($request->all());
+        if ($validator->fails()) {
+            return redirect()->route('auth.register', ['step' => 1])
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Store validated data in session
+        Session::put('registration_step1', $validator->validated());
+
+        return redirect()->route('auth.register', ['step' => 2]);
+    }
+
+    /**
+     * Handle step 2 of registration (Company Information).
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function registerStep2(Request $request)
+    {
+        $validator = $this->step2Validator($request->all());
+
+        if ($validator->fails()) {
+            return redirect()->route('auth.register', ['step' => 2])
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Store validated data in session
+        Session::put('registration_step2', $validator->validated());
+
+        return redirect()->route('auth.register', ['step' => 3]);
+    }
+
+    /**
+     * Handle step 3 of registration (Security & Terms).
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function registerStep3(Request $request)
+    {
+        $validator = $this->step3Validator($request->all());
+
+        if ($validator->fails()) {
+            return redirect()->route('auth.register', ['step' => 3])
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Merge all registration data
+        $userData = array_merge(
+            Session::get('registration_step1', []),
+            Session::get('registration_step2', []),
+            $validator->validated()
+        );
+
+        // Create user
+        $user = $this->create($userData);
+
+        // Clear registration session data
+        Session::forget(['registration_step1', 'registration_step2']);
 
         // Auto login after registration
         $this->guard()->login($user);
@@ -44,21 +115,18 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Get a validator for step 1 (Personal Information).
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function step1Validator(array $data)
     {
         return Validator::make($data, [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'string', 'max:20'],
-            'company' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'terms' => ['accepted'],
         ], [
             'first_name.required' => 'Nama depan harus diisi',
             'first_name.string' => 'Nama depan harus berupa string',
@@ -74,9 +142,46 @@ class RegisterController extends Controller
             'phone.required' => 'Nomor telepon harus diisi',
             'phone.string' => 'Nomor telepon harus berupa string',
             'phone.max' => 'Nomor telepon maksimal 20 karakter',
-            'company.required' => 'Nama perusahaan harus diisi',
-            'company.string' => 'Nama perusahaan harus berupa string',
-            'company.max' => 'Nama perusahaan maksimal 255 karakter',
+        ]);
+    }
+
+    /**
+     * Get a validator for step 2 (Company Information).
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function step2Validator(array $data)
+    {
+        return Validator::make($data, [
+            'company' => ['required', 'string', 'max:255'],
+            'position' => ['required', 'string', 'max:255'],
+            'join_date' => ['required', 'date', 'before_or_equal:today'],
+        ], [
+            'company.required' => 'Departemen harus dipilih',
+            'company.string' => 'Departemen harus berupa string',
+            'company.max' => 'Departemen maksimal 255 karakter',
+            'position.required' => 'Posisi/jabatan harus diisi',
+            'position.string' => 'Posisi/jabatan harus berupa string',
+            'position.max' => 'Posisi/jabatan maksimal 255 karakter',
+            'join_date.required' => 'Tanggal bergabung harus diisi',
+            'join_date.date' => 'Format tanggal tidak valid',
+            'join_date.before_or_equal' => 'Tanggal bergabung tidak boleh lebih dari hari ini',
+        ]);
+    }
+
+    /**
+     * Get a validator for step 3 (Security & Terms).
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function step3Validator(array $data)
+    {
+        return Validator::make($data, [
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'terms' => ['accepted'],
+        ], [
             'password.required' => 'Password harus diisi',
             'password.string' => 'Password harus berupa string',
             'password.min' => 'Password minimal 8 karakter',
