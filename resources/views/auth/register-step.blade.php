@@ -171,7 +171,7 @@
                 <label for="first_name" class="form-label fw-semibold">
                   <i class="fas fa-user me-2 text-primary"></i>Nama Depan*
                 </label>
-                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="John" required
+                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="John"
                   value="{{ old('first_name') }}">
                 @if ($errors->has('first_name'))
                   <div class="text-danger small mt-1">
@@ -184,7 +184,7 @@
                 <label for="last_name" class="form-label fw-semibold">
                   <i class="fas fa-user me-2 text-primary"></i>Nama Belakang*
                 </label>
-                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Doe" required
+                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Doe"
                   value="{{ old('last_name') }}">
                 @if ($errors->has('last_name'))
                   <div class="text-danger small mt-1">
@@ -199,7 +199,7 @@
                 <i class="fas fa-envelope me-2 text-primary"></i>Email*
               </label>
               <input type="email" class="form-control" id="email" name="email" placeholder="nama@novacorp.com"
-                required autocomplete="email" value="{{ old('email') }}">
+                autocomplete="email" value="{{ old('email') }}">
               @if ($errors->has('email'))
                 <div class="text-danger small mt-1">
                   <i class="fas fa-exclamation-circle"></i> {{ $errors->first('email') }}
@@ -212,7 +212,7 @@
                 <i class="fas fa-phone me-2 text-primary"></i>Nomor Telepon*
               </label>
               <input type="tel" class="form-control" id="phone" name="phone" placeholder="0812-3456-7890"
-                required value="{{ old('phone') }}">
+                value="{{ old('phone') }}">
               @if ($errors->has('phone'))
                 <div class="text-danger small mt-1">
                   <i class="fas fa-exclamation-circle"></i> {{ $errors->first('phone') }}
@@ -238,7 +238,7 @@
               <label for="company" class="form-label fw-semibold">
                 <i class="fas fa-building me-2 text-primary"></i>Departemen*
               </label>
-              <select class="form-select" id="company" name="company" required>
+              <select class="form-select" id="company" name="company">
                 <option value="">Pilih Departemen</option>
                 <option value="pemasaran" {{ old('company') == 'pemasaran' ? 'selected' : '' }}>Pemasaran</option>
                 <option value="penjualan" {{ old('company') == 'penjualan' ? 'selected' : '' }}>Penjualan</option>
@@ -260,7 +260,7 @@
                 <i class="fas fa-briefcase me-2 text-primary"></i>Posisi/Jabatan*
               </label>
               <input type="text" class="form-control" id="position" name="position" placeholder="Staff, Manager, etc."
-                required value="{{ old('position') }}">
+                value="{{ old('position') }}">
               @if ($errors->has('position'))
                 <div class="text-danger small mt-1">
                   <i class="fas fa-exclamation-circle"></i> {{ $errors->first('position') }}
@@ -273,7 +273,7 @@
                 <i class="fas fa-calendar me-2 text-primary"></i>Tanggal Bergabung*
               </label>
               <input type="date" class="form-control" id="join_date" name="join_date"
-                required value="{{ old('join_date') ?? date('Y-m-d') }}">
+                value="{{ old('join_date') ?? date('Y-m-d') }}">
               @if ($errors->has('join_date'))
                 <div class="text-danger small mt-1">
                   <i class="fas fa-exclamation-circle"></i> {{ $errors->first('join_date') }}
@@ -309,7 +309,7 @@
               </label>
               <div class="password-input-container">
                 <input type="password" class="form-control password-input" id="password" name="password"
-                  placeholder="Min. 8 karakter" required autocomplete="new-password">
+                  placeholder="Min. 8 karakter" autocomplete="new-password">
                 <button class="password-toggle" type="button" id="togglePassword">
                   <i class="fas fa-eye" id="eyeIcon"></i>
                 </button>
@@ -333,7 +333,7 @@
               </label>
               <div class="password-input-container">
                 <input type="password" class="form-control password-input" id="password_confirmation"
-                  name="password_confirmation" placeholder="Ulangi password" required autocomplete="new-password">
+                  name="password_confirmation" placeholder="Ulangi password" autocomplete="new-password">
                 <button class="password-toggle" type="button" id="togglePasswordConfirm">
                   <i class="fas fa-eye" id="eyeIconConfirm"></i>
                 </button>
@@ -347,7 +347,7 @@
 
             <div class="mb-4">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
+                <input class="form-check-input" type="checkbox" id="terms" name="terms">
                 <label class="form-check-label" for="terms">
                   Saya menyetujui <a href="#" class="text-decoration-none">Syarat & Ketentuan</a>
                   dan <a href="#" class="text-decoration-none">Kebijakan Privasi</a>
@@ -381,9 +381,10 @@
 
         <!-- Already have account -->
         <div class="text-center">
-          <p class="mb-0">
-            Sudah punya akun?
-            <a href="{{ route('auth.login') }}" class="text-decoration-none fw-semibold">
+          <p class="mb-0 d-lg-block">
+            <span class="d-lg-inline">Sudah punya akun?</span>
+            <a href="{{ route('auth.login') }}" class="text-decoration-none fw-semibold d-lg-inline">
+              <span class="d-lg-none"><br></span>
               Masuk di sini
               <i class="fas fa-arrow-right ms-1"></i>
             </a>
@@ -463,22 +464,43 @@
 
     @media (max-width: 768px) {
       .step-circle {
-        width: 32px;
-        height: 32px;
-        font-size: 13px;
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+        background: rgba(0, 0, 0, 0.1) !important;
+        border: 2px solid rgba(13, 110, 253, 0.4) !important;
+        color: rgba(0, 0, 0, 0.6) !important;
+      }
+
+      .step-indicator.active .step-circle {
+        background: #0d6efd !important;
+        color: white !important;
+        border: 2px solid #0d6efd !important;
       }
 
       .step-line {
-        width: 25px;
+        width: 28px;
+        height: 3px !important;
+        background: rgba(13, 110, 253, 0.2) !important;
+      }
+
+      .step-line.completed {
+        background: #0d6efd !important;
       }
 
       .step-label {
-        font-size: 9px;
+        font-size: 10px;
+        font-weight: 600 !important;
+        color: rgba(0, 0, 0, 0.6) !important;
+      }
+
+      .step-indicator.active .step-label {
+        color: rgba(0, 0, 0, 0.9) !important;
       }
 
       .auth-card {
-        margin: 10px !important;
-        padding: 20px !important;
+        margin: 30px 8px !important;
+        padding: 25px !important;
         border-radius: 15px !important;
       }
 
@@ -515,22 +537,43 @@
 
     @media (max-width: 576px) {
       .step-circle {
-        width: 28px;
-        height: 28px;
-        font-size: 11px;
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+        background: rgba(0, 0, 0, 0.1) !important;
+        border: 2px solid rgba(13, 110, 253, 0.4) !important;
+        color: rgba(0, 0, 0, 0.6) !important;
+      }
+
+      .step-indicator.active .step-circle {
+        background: #0d6efd !important;
+        color: white !important;
+        border: 2px solid #0d6efd !important;
       }
 
       .step-line {
-        width: 20px;
+        width: 24px;
+        height: 3px !important;
+        background: rgba(13, 110, 253, 0.2) !important;
+      }
+
+      .step-line.completed {
+        background: #0d6efd !important;
       }
 
       .step-label {
-        font-size: 8px;
+        font-size: 9px;
+        font-weight: 600 !important;
+        color: rgba(0, 0, 0, 0.6) !important;
+      }
+
+      .step-indicator.active .step-label {
+        color: rgba(0, 0, 0, 0.9) !important;
       }
 
       .auth-card {
-        margin: 8px !important;
-        padding: 15px !important;
+        margin: 25px 5px !important;
+        padding: 20px !important;
         border-radius: 12px !important;
       }
 
@@ -552,116 +595,15 @@
       h3 {
         font-size: 1.2rem !important;
       }
+
+      .text-center p span {
+        display: inline;
+      }
+
+      .text-center p a {
+        margin-left: 5px;
+      }
     }
   </style>
 @endsection
 
-@section('scripts')
-  <script>
-    // Toggle password visibility
-    if (document.getElementById('togglePassword')) {
-      document.getElementById('togglePassword').addEventListener('click', function() {
-        const passwordInput = document.getElementById('password');
-        const eyeIcon = document.getElementById('eyeIcon');
-
-        if (passwordInput.type === 'password') {
-          passwordInput.type = 'text';
-          eyeIcon.classList.remove('fa-eye');
-          eyeIcon.classList.add('fa-eye-slash');
-        } else {
-          passwordInput.type = 'password';
-          eyeIcon.classList.remove('fa-eye-slash');
-          eyeIcon.classList.add('fa-eye');
-        }
-      });
-    }
-
-    // Toggle confirm password visibility
-    if (document.getElementById('togglePasswordConfirm')) {
-      document.getElementById('togglePasswordConfirm').addEventListener('click', function() {
-        const passwordConfirmInput = document.getElementById('password_confirmation');
-        const eyeIconConfirm = document.getElementById('eyeIconConfirm');
-
-        if (passwordConfirmInput.type === 'password') {
-          passwordConfirmInput.type = 'text';
-          eyeIconConfirm.classList.remove('fa-eye');
-          eyeIconConfirm.classList.add('fa-eye-slash');
-        } else {
-          passwordConfirmInput.type = 'password';
-          eyeIconConfirm.classList.remove('fa-eye-slash');
-          eyeIconConfirm.classList.add('fa-eye');
-        }
-      });
-    }
-
-    // Password strength checker (only for step 3)
-    const passwordInput = document.getElementById('password');
-    if (passwordInput) {
-      const passwordStrength = document.getElementById('passwordStrength');
-      const passwordHint = document.getElementById('passwordHint');
-
-      passwordInput.addEventListener('input', function() {
-        const password = this.value;
-        let strength = 0;
-        let feedback = '';
-
-        if (password.length >= 8) strength += 25;
-        if (password.match(/[a-z]/)) strength += 25;
-        if (password.match(/[A-Z]/)) strength += 25;
-        if (password.match(/[0-9]/)) strength += 12.5;
-        if (password.match(/[^a-zA-Z0-9]/)) strength += 12.5;
-
-        passwordStrength.style.width = strength + '%';
-
-        if (strength < 25) {
-          passwordStrength.className = 'progress-bar bg-danger';
-          feedback = 'Password sangat lemah';
-        } else if (strength < 50) {
-          passwordStrength.className = 'progress-bar bg-warning';
-          feedback = 'Password lemah';
-        } else if (strength < 75) {
-          passwordStrength.className = 'progress-bar bg-info';
-          feedback = 'Password cukup kuat';
-        } else {
-          passwordStrength.className = 'progress-bar bg-success';
-          feedback = 'Password sangat kuat';
-        }
-
-        passwordHint.textContent = feedback;
-      });
-    }
-
-    // Form validation on submit (only for step 3)
-    const formStep3 = document.querySelector('form[action*="step3"]');
-    if (formStep3) {
-      formStep3.addEventListener('submit', function(e) {
-        const password = document.getElementById('password').value;
-        const passwordConfirm = document.getElementById('password_confirmation').value;
-
-        if (password !== passwordConfirm) {
-          e.preventDefault();
-          alert('Password dan konfirmasi password tidak cocok!');
-          return false;
-        }
-
-        if (password.length < 8) {
-          e.preventDefault();
-          alert('Password harus minimal 8 karakter!');
-          return false;
-        }
-      });
-    }
-
-    // Add animation to form inputs
-    const inputs = document.querySelectorAll('.form-control');
-    inputs.forEach(input => {
-      input.addEventListener('focus', function() {
-        this.parentElement.style.transform = 'scale(1.02)';
-      });
-
-      input.addEventListener('blur', function() {
-        this.parentElement.style.transform = 'scale(1)';
-      });
-    });
-  </script>
-@endsection

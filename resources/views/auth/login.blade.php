@@ -53,8 +53,8 @@
           <div class="logo-main mb-3" style="width: 50px; height: 50px; margin: 0 auto;">
             <i class="fas fa-chart-line fa-1x text-white" style="font-size: 1.2rem;"></i>
           </div>
-          <h3 class="fw-bold text-primary mb-2">Sistem Kinerja</h3>
-          <p class="text-muted small">Platform monitoring kinerja</p>
+          <h3 class="fw-bold text-primary mb-2">Portal Kinerja</h3>
+          <p class="text-muted small">Selamat datang kembali! Masuk ke sistem kinerja karyawan</p>
         </div>
 
         <!-- Desktop Header -->
@@ -92,7 +92,7 @@
               <i class="fas fa-envelope me-2 text-primary"></i>Email Address
             </label>
             <input type="email" class="form-control" id="email" name="email" placeholder="nama@email.com"
-              required autocomplete="email" value="{{ old('email') }}">
+              autocomplete="email" value="{{ old('email') }}">
             @if ($errors->has('email'))
               <div class="text-danger small mt-1">
                 <i class="fas fa-exclamation-circle"></i> {{ $errors->first('email') }}
@@ -106,7 +106,7 @@
             </label>
             <div class="password-input-container">
               <input type="password" class="form-control password-input" id="password" name="password" placeholder="Masukkan password"
-                required autocomplete="current-password">
+                autocomplete="current-password">
               <button class="password-toggle" type="button" id="togglePassword">
                 <i class="fas fa-eye" id="eyeIcon"></i>
               </button>
@@ -160,9 +160,10 @@
         </div>
 
         <div class="text-center">
-          <p class="mb-0">
-            Belum punya akun?
-            <a href="{{ route('auth.register') }}" class="text-decoration-none fw-semibold">
+          <p class="mb-0 d-lg-block">
+            <span class="d-lg-inline">Belum punya akun?</span>
+            <a href="{{ route('auth.register') }}" class="text-decoration-none fw-semibold d-lg-inline">
+              <span class="d-lg-none"><br></span>
               Daftar sekarang
               <i class="fas fa-arrow-right ms-1"></i>
             </a>
@@ -178,8 +179,8 @@
   <style>
     @media (max-width: 768px) {
       .auth-card {
-        margin: 10px !important;
-        padding: 20px !important;
+        margin: 30px 8px !important;
+        padding: 25px !important;
         border-radius: 15px !important;
       }
 
@@ -216,8 +217,8 @@
 
     @media (max-width: 576px) {
       .auth-card {
-        margin: 8px !important;
-        padding: 15px !important;
+        margin: 25px 5px !important;
+        padding: 20px !important;
         border-radius: 12px !important;
       }
 
@@ -243,47 +244,3 @@
   </style>
 @endsection
 
-@section('scripts')
-  <script>
-    // Toggle password visibility
-    document.getElementById('togglePassword').addEventListener('click', function() {
-      const passwordInput = document.getElementById('password');
-      const eyeIcon = document.getElementById('eyeIcon');
-
-      if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        eyeIcon.classList.remove('fa-eye');
-        eyeIcon.classList.add('fa-eye-slash');
-      } else {
-        passwordInput.type = 'password';
-        eyeIcon.classList.remove('fa-eye-slash');
-        eyeIcon.classList.add('fa-eye');
-      }
-    });
-
-    // Add animation to form inputs
-    const inputs = document.querySelectorAll('.form-control');
-    inputs.forEach(input => {
-      input.addEventListener('focus', function() {
-        this.parentElement.style.transform = 'scale(1.02)';
-      });
-
-      input.addEventListener('blur', function() {
-        this.parentElement.style.transform = 'scale(1)';
-      });
-    });
-
-    // Social login handlers (placeholder)
-    document.querySelectorAll('.social-btn').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const platform = this.querySelector('i').classList.contains('fa-facebook-f') ? 'Facebook' :
-          this.querySelector('i').classList.contains('fa-google') ? 'Google' :
-          this.querySelector('i').classList.contains('fa-linkedin-in') ? 'LinkedIn' : 'Microsoft';
-
-        // Placeholder for social login
-        alert(`Login dengan ${platform} akan segera tersedia!`);
-      });
-    });
-  </script>
-@endsection
