@@ -81,39 +81,12 @@
           <h3 class="fw-bold text-white">Kinerja Karyawan</h3>
         </div>
 
-        <div class="text-center mb-4">
+        <div class="text-center mb-5">
           <h2 class="fw-bold mb-2"
             style="background: var(--secondary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">
             Registrasi Karyawan Baru
           </h2>
           <p class="text-muted">Daftar untuk akses sistem monitoring kinerja</p>
-        </div>
-
-        <!-- Progress Steps -->
-        <div class="d-flex justify-content-between mb-4">
-          <div class="text-center flex-fill">
-            <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-2"
-              style="width: 30px; height: 30px; font-size: 0.8rem;">
-              1
-            </div>
-            <p class="small mb-0 fw-semibold">Data Karyawan</p>
-          </div>
-          <div class="flex-fill border-top pt-4 mt-2" style="border-color: #e9ecef !important;"></div>
-          <div class="text-center flex-fill">
-            <div class="rounded-circle bg-light text-muted d-inline-flex align-items-center justify-content-center mb-2"
-              style="width: 30px; height: 30px; font-size: 0.8rem;">
-              2
-            </div>
-            <p class="small mb-0 text-muted">Dept. & Jabatan</p>
-          </div>
-          <div class="flex-fill border-top pt-4 mt-2" style="border-color: #e9ecef !important;"></div>
-          <div class="text-center flex-fill">
-            <div class="rounded-circle bg-light text-muted d-inline-flex align-items-center justify-content-center mb-2"
-              style="width: 30px; height: 30px; font-size: 0.8rem;">
-              3
-            </div>
-            <p class="small mb-0 text-muted">Selesai</p>
-          </div>
         </div>
 
         <!-- Flash Messages -->
@@ -143,7 +116,7 @@
                 <i class="fas fa-user me-2 text-primary"></i>Nama Depan*
               </label>
               <input type="text" class="form-control" id="first_name" name="first_name" placeholder="John" required
-                  value="{{ old('first_name') }}">
+                value="{{ old('first_name') }}">
               @if ($errors->has('first_name'))
                 <div class="text-danger small mt-1">
                   <i class="fas fa-exclamation-circle"></i> {{ $errors->first('first_name') }}
@@ -156,7 +129,7 @@
                 <i class="fas fa-user me-2 text-primary"></i>Nama Belakang*
               </label>
               <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Doe" required
-                  value="{{ old('last_name') }}">
+                value="{{ old('last_name') }}">
               @if ($errors->has('last_name'))
                 <div class="text-danger small mt-1">
                   <i class="fas fa-exclamation-circle"></i> {{ $errors->first('last_name') }}
@@ -169,8 +142,8 @@
             <label for="email" class="form-label fw-semibold">
               <i class="fas fa-envelope me-2 text-primary"></i>Email*
             </label>
-            <input type="email" class="form-control" id="email" name="email"
-                placeholder="nama@novacorp.com" required autocomplete="email" value="{{ old('email') }}">
+            <input type="email" class="form-control" id="email" name="email" placeholder="nama@novacorp.com"
+              required autocomplete="email" value="{{ old('email') }}">
             @if ($errors->has('email'))
               <div class="text-danger small mt-1">
                 <i class="fas fa-exclamation-circle"></i> {{ $errors->first('email') }}
@@ -183,7 +156,7 @@
               <i class="fas fa-phone me-2 text-primary"></i>Nomor Telepon*
             </label>
             <input type="tel" class="form-control" id="phone" name="phone" placeholder="0812-3456-7890"
-                required value="{{ old('phone') }}">
+              required value="{{ old('phone') }}">
             @if ($errors->has('phone'))
               <div class="text-danger small mt-1">
                 <i class="fas fa-exclamation-circle"></i> {{ $errors->first('phone') }}
@@ -241,8 +214,8 @@
               <i class="fas fa-lock me-2 text-primary"></i>Konfirmasi Password
             </label>
             <div class="password-input-container">
-              <input type="password" class="form-control password-input" id="password_confirmation" name="password_confirmation"
-                placeholder="Ulangi password" required autocomplete="new-password">
+              <input type="password" class="form-control password-input" id="password_confirmation"
+                name="password_confirmation" placeholder="Ulangi password" required autocomplete="new-password">
               <button class="password-toggle" type="button" id="togglePasswordConfirm">
                 <i class="fas fa-eye" id="eyeIconConfirm"></i>
               </button>
@@ -314,18 +287,18 @@
 
     // Toggle confirm password visibility
     document.getElementById('togglePasswordConfirm').addEventListener('click', function() {
-        const passwordConfirmInput = document.getElementById('password_confirmation');
-        const eyeIconConfirm = document.getElementById('eyeIconConfirm');
+      const passwordConfirmInput = document.getElementById('password_confirmation');
+      const eyeIconConfirm = document.getElementById('eyeIconConfirm');
 
-        if (passwordConfirmInput.type === 'password') {
-            passwordConfirmInput.type = 'text';
-            eyeIconConfirm.classList.remove('fa-eye');
-            eyeIconConfirm.classList.add('fa-eye-slash');
-        } else {
-            passwordConfirmInput.type = 'password';
-            eyeIconConfirm.classList.remove('fa-eye-slash');
-            eyeIconConfirm.classList.add('fa-eye');
-        }
+      if (passwordConfirmInput.type === 'password') {
+        passwordConfirmInput.type = 'text';
+        eyeIconConfirm.classList.remove('fa-eye');
+        eyeIconConfirm.classList.add('fa-eye-slash');
+      } else {
+        passwordConfirmInput.type = 'password';
+        eyeIconConfirm.classList.remove('fa-eye-slash');
+        eyeIconConfirm.classList.add('fa-eye');
+      }
     });
 
     // Password strength checker
@@ -363,7 +336,7 @@
       passwordHint.textContent = feedback;
     });
 
-    
+
     // Form validation on submit
     document.querySelector('form').addEventListener('submit', function(e) {
       const password = passwordInput.value;
