@@ -80,17 +80,51 @@
     </div>
 
     <!-- Right Panel - Registration Form -->
-    <div class="col-lg-6 col-md-8">
-      <div class="auth-card p-5" style="margin-top: 40px; margin-bottom: 40px;">
-        <!-- Logo for mobile -->
+    <div class="col-lg-6 col-md-12">
+      <div class="auth-card p-3 p-lg-5" style="margin: 15px;">
+        <!-- Mobile Header -->
         <div class="d-lg-none text-center mb-4">
-          <div class="logo-main mb-3">
-            <i class="fas fa-rocket fa-2x text-white"></i>
+          <div class="logo-main mb-3" style="width: 50px; height: 50px; margin: 0 auto;">
+            <i class="fas fa-rocket fa-1x text-white" style="font-size: 1.2rem;"></i>
           </div>
-          <h3 class="fw-bold text-white">Kinerja Karyawan</h3>
+          <h3 class="fw-bold text-primary mb-2">Registrasi Karyawan</h3>
+          <p class="text-muted small mb-3">
+              @switch($step)
+                @case(1)
+                  Langkah 1: Data Pribadi
+                  @break
+                @case(2)
+                  Langkah 2: Perusahaan
+                  @break
+                @case(3)
+                  Langkah 3: Keamanan
+                  @break
+              @endswitch
+          </p>
+
+          <!-- Mobile Progress Steps -->
+          <div class="mb-3">
+            <div class="d-flex justify-content-center align-items-center" style="gap: 15px;">
+              <div class="step-indicator {{ $step >= 1 ? 'active' : '' }}" data-step="1">
+                <div class="step-circle">1</div>
+                <span class="step-label">Data</span>
+              </div>
+              <div class="step-line {{ $step >= 2 ? 'completed' : '' }}"></div>
+              <div class="step-indicator {{ $step >= 2 ? 'active' : '' }}" data-step="2">
+                <div class="step-circle">2</div>
+                <span class="step-label">Perusahaan</span>
+              </div>
+              <div class="step-line {{ $step >= 3 ? 'completed' : '' }}"></div>
+              <div class="step-indicator {{ $step >= 3 ? 'active' : '' }}" data-step="3">
+                <div class="step-circle">3</div>
+                <span class="step-label">Keamanan</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="text-center mb-5">
+        <!-- Desktop Header -->
+        <div class="d-none d-lg-block text-center mb-5">
           <h2 class="fw-bold mb-2"
             style="background: var(--secondary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">
             Registrasi Karyawan Baru
@@ -187,7 +221,7 @@
             </div>
 
             <div class="d-grid mb-4">
-              <button type="submit" class="btn btn-primary-gradient btn-lg">
+              <button type="submit" class="btn btn-primary-gradient">
                 Lanjut
                 <i class="fas fa-arrow-right ms-2"></i>
               </button>
@@ -249,13 +283,13 @@
 
             <div class="row">
               <div class="col-6">
-                <button type="button" class="btn btn-outline-primary btn-lg w-100" onclick="history.back()">
+                <button type="button" class="btn btn-outline-primary w-100" onclick="history.back()">
                   <i class="fas fa-arrow-left me-2"></i>
                   Kembali
                 </button>
               </div>
               <div class="col-6">
-                <button type="submit" class="btn btn-primary-gradient btn-lg w-100">
+                <button type="submit" class="btn btn-primary-gradient w-100">
                   Lanjut
                   <i class="fas fa-arrow-right ms-2"></i>
                 </button>
@@ -328,13 +362,13 @@
 
             <div class="row">
               <div class="col-6">
-                <button type="button" class="btn btn-outline-primary btn-lg w-100" onclick="history.back()">
+                <button type="button" class="btn btn-outline-primary w-100" onclick="history.back()">
                   <i class="fas fa-arrow-left me-2"></i>
                   Kembali
                 </button>
               </div>
               <div class="col-6">
-                <button type="submit" class="btn btn-primary-gradient btn-lg w-100">
+                <button type="submit" class="btn btn-primary-gradient w-100">
                   <i class="fas fa-check me-2"></i>
                   Daftar Sekarang
                 </button>
@@ -428,12 +462,95 @@
     }
 
     @media (max-width: 768px) {
+      .step-circle {
+        width: 32px;
+        height: 32px;
+        font-size: 13px;
+      }
+
       .step-line {
-        width: 40px;
+        width: 25px;
       }
 
       .step-label {
-        font-size: 10px;
+        font-size: 9px;
+      }
+
+      .auth-card {
+        margin: 10px !important;
+        padding: 20px !important;
+        border-radius: 15px !important;
+      }
+
+      .btn-primary-gradient, .btn-outline-primary {
+        padding: 12px 24px !important;
+        font-size: 1rem !important;
+        border-radius: 12px !important;
+      }
+
+      .form-control, .form-select {
+        padding: 12px 16px !important;
+        font-size: 0.9rem !important;
+        border-radius: 12px !important;
+      }
+
+      .form-label {
+        font-size: 0.85rem !important;
+        margin-bottom: 0.5rem !important;
+      }
+
+      .logo-main {
+        width: 50px !important;
+        height: 50px !important;
+      }
+
+      h3 {
+        font-size: 1.3rem !important;
+      }
+
+      .text-muted.small {
+        font-size: 0.8rem !important;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .step-circle {
+        width: 28px;
+        height: 28px;
+        font-size: 11px;
+      }
+
+      .step-line {
+        width: 20px;
+      }
+
+      .step-label {
+        font-size: 8px;
+      }
+
+      .auth-card {
+        margin: 8px !important;
+        padding: 15px !important;
+        border-radius: 12px !important;
+      }
+
+      .btn-primary-gradient, .btn-outline-primary {
+        padding: 10px 20px !important;
+        font-size: 0.9rem !important;
+      }
+
+      .form-control, .form-select {
+        padding: 10px 14px !important;
+        font-size: 0.85rem !important;
+      }
+
+      .logo-main {
+        width: 45px !important;
+        height: 45px !important;
+      }
+
+      h3 {
+        font-size: 1.2rem !important;
       }
     }
   </style>
