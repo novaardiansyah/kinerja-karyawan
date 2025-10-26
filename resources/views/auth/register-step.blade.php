@@ -232,35 +232,34 @@
             @csrf
 
             <div class="mb-3">
-              <label for="company" class="form-label fw-semibold">
+              <label for="department_id" class="form-label fw-semibold">
                 <i class="fas fa-building me-2 text-primary"></i>Departemen*
               </label>
-              <select class="form-select" id="company" name="company">
+              <select class="form-select" id="department_id" name="department_id">
                 <option value="">Pilih Departemen</option>
-                <option value="pemasaran" {{ old('company') == 'pemasaran' ? 'selected' : '' }}>Pemasaran</option>
-                <option value="penjualan" {{ old('company') == 'penjualan' ? 'selected' : '' }}>Penjualan</option>
-                <option value="sdm" {{ old('company') == 'sdm' ? 'selected' : '' }}>Sumber Daya Manusia (SDM)</option>
-                <option value="keuangan" {{ old('company') == 'keuangan' ? 'selected' : '' }}>Keuangan</option>
-                <option value="ti" {{ old('company') == 'ti' ? 'selected' : '' }}>Teknologi Informasi (TI)</option>
-                <option value="produksi" {{ old('company') == 'produksi' ? 'selected' : '' }}>Produksi/Operasi</option>
-                <option value="rnd" {{ old('company') == 'rnd' ? 'selected' : '' }}>Riset dan Pengembangan (R&D)</option>
+                @foreach($departments as $department)
+                  <option value="{{ $department->id }}" {{ old('department_id') == $department->id ? 'selected' : '' }}>
+                    {{ $department->name }}
+                  </option>
+                @endforeach
               </select>
-              @if ($errors->has('company'))
+              @if ($errors->has('department_id'))
                 <div class="text-danger small mt-1">
-                  <i class="fas fa-exclamation-circle"></i> {{ $errors->first('company') }}
+                  <i class="fas fa-exclamation-circle"></i> {{ $errors->first('department_id') }}
                 </div>
               @endif
             </div>
 
             <div class="mb-3">
-              <label for="position" class="form-label fw-semibold">
+              <label for="position_id" class="form-label fw-semibold">
                 <i class="fas fa-briefcase me-2 text-primary"></i>Posisi/Jabatan*
               </label>
-              <input type="text" class="form-control" id="position" name="position" placeholder="Staff, Manager, etc."
-                value="{{ old('position') }}">
-              @if ($errors->has('position'))
+              <select class="form-select" id="position_id" name="position_id" disabled>
+                <option value="">Pilih departemen terlebih dahulu</option>
+              </select>
+              @if ($errors->has('position_id'))
                 <div class="text-danger small mt-1">
-                  <i class="fas fa-exclamation-circle"></i> {{ $errors->first('position') }}
+                  <i class="fas fa-exclamation-circle"></i> {{ $errors->first('position_id') }}
                 </div>
               @endif
             </div>
@@ -628,5 +627,74 @@
       }
     }
   </style>
+@endsection
+
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const departmentSelect = document.getElementById('department_id');
+    const positionSelect = document.getElementById('position_id');
+
+    if (departmentSelect && positionSelect) {
+        departmentSelect.addEventListener('change', function() {
+            const departmentId = this.value;
+
+            // Reset position select
+            positionSelect.innerHTML = '<option value="">Memuat...</option>';
+            positionSelect.disabled = true;
+
+            if (departmentId) {
+                // Fetch positions via API
+                fetch(`/api/positions/by-department?department_id=${departmentId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        positionSelect.innerHTML = '<option value="">Pilih Posisi</option>';
+
+                        if (data.success && data.data.length > 0) {
+                            data.data.forEach(position => {
+                                const option = document.createElement('option');
+                                option.value = position.id;
+                                option.textContent = `${position.name} (${position.level})`;
+                                positionSelect.appendChild(option);
+                            });
+                            positionSelect.disabled = false;
+                        } else {
+                            positionSelect.innerHTML = '<option value="">Tidak ada posisi tersedia</option>';
+                            positionSelect.disabled = true;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching positions:', error);
+                        positionSelect.innerHTML = '<option value="">Terjadi kesalahan</option>';
+                        positionSelect.disabled = true;
+                    });
+            } else {
+                positionSelect.innerHTML = '<option value="">Pilih departemen terlebih dahulu</option>';
+                positionSelect.disabled = true;
+            }
+        });
+
+        // Handle form submission validation
+        const form = document.querySelector('form[action*="register.step2"]');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                if (!departmentSelect.value) {
+                    e.preventDefault();
+                    alert('Silakan pilih departemen terlebih dahulu');
+                    departmentSelect.focus();
+                    return;
+                }
+
+                if (!positionSelect.value || positionSelect.disabled) {
+                    e.preventDefault();
+                    alert('Silakan pilih posisi/jabatan');
+                    positionSelect.focus();
+                    return;
+                }
+            });
+        }
+    }
+});
+</script>
 @endsection
 

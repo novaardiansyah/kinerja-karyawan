@@ -25,7 +25,10 @@ class RegisterController extends Controller
             return redirect()->route('auth.register', ['step' => 1]);
         }
 
-        return view('auth.register-step', compact('step'));
+        // Get departments for step 2
+        $departments = \App\Models\Department::active()->get();
+
+        return view('auth.register-step', compact('step', 'departments'));
     }
 
     /**
@@ -154,16 +157,14 @@ class RegisterController extends Controller
     protected function step2Validator(array $data)
     {
         return Validator::make($data, [
-            'company' => ['required', 'string', 'max:255'],
-            'position' => ['required', 'string', 'max:255'],
+            'department_id' => ['required', 'exists:departments,id'],
+            'position_id' => ['required', 'exists:positions,id'],
             'join_date' => ['required', 'date', 'before_or_equal:today'],
         ], [
-            'company.required' => 'Departemen harus dipilih',
-            'company.string' => 'Departemen harus berupa string',
-            'company.max' => 'Departemen maksimal 255 karakter',
-            'position.required' => 'Posisi/jabatan harus diisi',
-            'position.string' => 'Posisi/jabatan harus berupa string',
-            'position.max' => 'Posisi/jabatan maksimal 255 karakter',
+            'department_id.required' => 'Departemen harus dipilih',
+            'department_id.exists' => 'Departemen tidak valid',
+            'position_id.required' => 'Posisi/jabatan harus dipilih',
+            'position_id.exists' => 'Posisi tidak valid',
             'join_date.required' => 'Tanggal bergabung harus diisi',
             'join_date.date' => 'Format tanggal tidak valid',
             'join_date.before_or_equal' => 'Tanggal bergabung tidak boleh lebih dari hari ini',
@@ -199,10 +200,35 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['first_name'] . ' ' . $data['last_name'],
+            'name' => trim($data['first_name'] . ' ' . $data['last_name']),
             'email' => $data['email'],
+            'phone' => $data['phone'],
+            'department_id' => $data['department_id'],
+            'position_id' => $data['position_id'],
+            'join_date' => $data['join_date'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    /**
+     * Get positions by department for AJAX request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getPositionsByDepartment(Request $request)
+    {
+        $departmentId = $request->get('department_id');
+
+        if (!$departmentId) {
+            return response()->json([]);
+        }
+
+        $positions = \App\Models\Position::active()
+            ->byDepartment($departmentId)
+            ->get(['id', 'name', 'level']);
+
+        return response()->json($positions);
     }
 
     /**
