@@ -16,7 +16,7 @@ Route::middleware(['guest'])->get('/login', [LoginController::class, 'showLoginF
 Route::prefix('auth')->name('auth.')->group(function () {
   // ! Login Routes
   Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
-  Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+  Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
   // ! Registration Routes
   Route::get('/register/{step?}', [RegisterController::class, 'showRegistrationForm'])->name('register');
