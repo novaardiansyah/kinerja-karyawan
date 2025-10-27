@@ -19,9 +19,9 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
               <li>
-                <h6 class="dropdown-header">Notifications</h6>
+                <h6 class="dropdown-header">Notifikasi</h6>
               </li>
-              <li><a class="dropdown-item">No notification available</a></li>
+              <li><a class="dropdown-item">Tidak ada notifikasi</a></li>
             </ul>
           </li>
         </ul>
@@ -41,14 +41,14 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
             <li>
-              <h6 class="dropdown-header">Hello, {{ explode(' ', Auth::user()->name)[0] }}!</h6>
+              <h6 class="dropdown-header">Halo, {{ explode(' ', Auth::user()->name)[0] }}!</h6>
             </li>
-            <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My
-                Profile</a></li>
+            <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> Profil
+                Saya</a></li>
             <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i>
-                Settings</a></li>
+                Pengaturan</a></li>
             <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-wallet me-2"></i>
-                Wallet</a></li>
+                Dompet</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -57,7 +57,7 @@
                 @csrf
                 <button type="submit" class="dropdown-item" style="border: none; background: none; width: 100%; text-align: left; padding: 0.5rem 1rem;">
                   <i class="icon-mid bi bi-box-arrow-left me-2"></i>
-                  Logout
+                  Keluar
                 </button>
               </form>
             </li>
