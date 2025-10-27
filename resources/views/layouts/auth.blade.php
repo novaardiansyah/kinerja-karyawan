@@ -1,486 +1,535 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Kinerja Karyawan') - Sistem Monitoring Kinerja Perusahaan</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@yield('title', 'Kinerja Karyawan') - Sistem Monitoring Kinerja Perusahaan</title>
 
-    <!-- Bootstrap 5.3.8 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <!-- Bootstrap 5.3.8 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
-    <!-- Font Awesome untuk Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Font Awesome untuk Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Google Fonts - Poppins untuk tampilan modern -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts - Poppins untuk tampilan modern -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            /* Primary Color Scheme - Modern Bright Blue */
-            --primary-gradient: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
-            --secondary-gradient: linear-gradient(135deg, #63b3ed 0%, #4299e1 100%);
-            --success-gradient: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
-            --warning-gradient: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
-            --danger-gradient: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
-            --info-gradient: linear-gradient(135deg, #63b3ed 0%, #4299e1 100%);
+  <style>
+    :root {
+      /* Primary Color Scheme - Modern Bright Blue */
+      --primary-gradient: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+      --secondary-gradient: linear-gradient(135deg, #63b3ed 0%, #4299e1 100%);
+      --success-gradient: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+      --warning-gradient: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+      --danger-gradient: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
+      --info-gradient: linear-gradient(135deg, #63b3ed 0%, #4299e1 100%);
 
-            /* Solid Colors */
-            --primary: #4299e1;
-            --secondary: #4299e1;
-            --accent: #63b3ed;
-            --success: #48bb78;
-            --warning: #f6ad55;
-            --danger: #fc8181;
-            --info: #63b3ed;
+      /* Solid Colors */
+      --primary: #4299e1;
+      --secondary: #4299e1;
+      --accent: #63b3ed;
+      --success: #48bb78;
+      --warning: #f6ad55;
+      --danger: #fc8181;
+      --info: #63b3ed;
 
-            /* Glass Morphism */
-            --glass-bg: rgba(255, 255, 255, 0.95);
-            --glass-border: rgba(255, 255, 255, 0.18);
-            --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      /* Glass Morphism */
+      --glass-bg: rgba(255, 255, 255, 0.95);
+      --glass-border: rgba(255, 255, 255, 0.18);
+      --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
 
-            /* Text Colors */
-            --text-primary: #2d3748;
-            --text-secondary: #718096;
-            --text-muted: #a0aec0;
+      /* Text Colors */
+      --text-primary: #2d3748;
+      --text-secondary: #718096;
+      --text-muted: #a0aec0;
 
-            /* Background Colors */
-            --bg-primary: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
-            --bg-light: #f7fafc;
-            --bg-white: #ffffff;
+      /* Background Colors */
+      --bg-primary: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+      --bg-light: #f7fafc;
+      --bg-white: #ffffff;
 
-            /* Border Colors */
-            --border-light: #e2e8f0;
-            --border-medium: #cbd5e0;
-            --border-dark: #a0aec0;
-        }
+      /* Border Colors */
+      --border-light: #e2e8f0;
+      --border-medium: #cbd5e0;
+      --border-dark: #a0aec0;
+    }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            min-height: 100vh;
-            background: var(--bg-primary);
-            position: relative;
-            overflow-x: hidden;
-            color: var(--text-primary);
-        }
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      background: var(--bg-primary);
+      position: relative;
+      overflow-x: hidden;
+      color: var(--text-primary);
+    }
 
-        /* Animated Background Elements */
-        .bg-animation {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-            overflow: hidden;
-        }
+    /* Animated Background Elements */
+    .bg-animation {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
 
-        .floating-shape {
-            position: absolute;
-            opacity: 0.1;
-            animation: float 20s infinite ease-in-out;
-        }
+    .floating-shape {
+      position: absolute;
+      opacity: 0.1;
+      animation: float 20s infinite ease-in-out;
+    }
 
-        .shape-1 {
-            width: 80px;
-            height: 80px;
-            background: white;
-            border-radius: 50%;
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
+    .shape-1 {
+      width: 80px;
+      height: 80px;
+      background: white;
+      border-radius: 50%;
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
 
-        .shape-2 {
-            width: 120px;
-            height: 120px;
-            background: white;
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            top: 60%;
-            right: 10%;
-            animation-delay: 5s;
-        }
+    .shape-2 {
+      width: 120px;
+      height: 120px;
+      background: white;
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      top: 60%;
+      right: 10%;
+      animation-delay: 5s;
+    }
 
-        .shape-3 {
-            width: 100px;
-            height: 100px;
-            background: white;
-            border-radius: 50%;
-            bottom: 20%;
-            left: 30%;
-            animation-delay: 10s;
-        }
+    .shape-3 {
+      width: 100px;
+      height: 100px;
+      background: white;
+      border-radius: 50%;
+      bottom: 20%;
+      left: 30%;
+      animation-delay: 10s;
+    }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            33% { transform: translateY(-30px) rotate(120deg); }
-            66% { transform: translateY(30px) rotate(240deg); }
-        }
+    @keyframes float {
 
-        /* Glass Morphism Card */
-        .auth-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            box-shadow: var(--glass-shadow);
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
 
-        .auth-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(31, 38, 135, 0.25);
-        }
+      33% {
+        transform: translateY(-30px) rotate(120deg);
+      }
 
-        .auth-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
+      66% {
+        transform: translateY(30px) rotate(240deg);
+      }
+    }
 
-        .auth-card:hover::before {
-            left: 100%;
-        }
+    /* Glass Morphism Card */
+    .auth-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      box-shadow: var(--glass-shadow);
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
 
-        /* Logo Animation */
-        .logo-container {
-            position: relative;
-            margin-bottom: 2rem;
-        }
+    .auth-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(31, 38, 135, 0.25);
+    }
 
-        .logo-main {
-            width: 80px;
-            height: 80px;
-            background: var(--secondary-gradient);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-            animation: pulse 2s infinite;
-            transition: all 0.3s ease;
-        }
+    .auth-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
 
-        .logo-main:hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
-        }
+    .auth-card:hover::before {
+      left: 100%;
+    }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
+    /* Logo Animation */
+    .logo-container {
+      position: relative;
+      margin-bottom: 2rem;
+    }
 
-        /* Form Styling */
-        .form-control, .form-select {
-            border: 2px solid var(--border-light);
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 16px;
-            padding: 14px 20px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            color: var(--text-primary);
-        }
+    .logo-main {
+      width: 80px;
+      height: 80px;
+      background: var(--secondary-gradient);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+      animation: pulse 2s infinite;
+      transition: all 0.3s ease;
+    }
 
-        .form-control:focus, .form-select:focus {
-            border-color: var(--secondary);
-            background: white;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15);
-            outline: none;
-        }
+    .logo-main:hover {
+      transform: scale(1.1);
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+    }
 
-        .form-control::placeholder {
-            color: var(--text-muted);
-            font-weight: 400;
-        }
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
 
-        .form-control, .form-select {
-            border-radius: 16px !important;
-        }
+      50% {
+        transform: scale(1.05);
+      }
 
-        /* Password Input with Toggle */
-        .password-input-container {
-            position: relative;
-        }
+      100% {
+        transform: scale(1);
+      }
+    }
 
-        .password-input {
-            padding-right: 50px !important;
-        }
+    /* Form Styling */
+    .form-control,
+    .form-select {
+      border: 2px solid var(--border-light);
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 16px;
+      padding: 14px 20px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      color: var(--text-primary);
+    }
 
-        .password-toggle {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            z-index: 10;
-            padding: 5px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
+    .form-control:focus,
+    .form-select:focus {
+      border-color: var(--secondary);
+      background: white;
+      box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15);
+      outline: none;
+    }
 
-        .password-toggle:hover {
-            background: rgba(0, 0, 0, 0.05);
-            color: var(--secondary);
-        }
+    .form-control::placeholder {
+      color: var(--text-muted);
+      font-weight: 400;
+    }
 
-        .password-toggle:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
-        }
+    .form-control,
+    .form-select {
+      border-radius: 16px !important;
+    }
 
-        
-        /* Button Styling */
-        .btn-primary-gradient {
-            background: var(--secondary-gradient);
-            border: none;
-            border-radius: 16px;
-            color: white !important;
-            font-weight: 600;
-            padding: 14px 32px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
+    /* Password Input with Toggle */
+    .password-input-container {
+      position: relative;
+    }
 
-        .btn-primary-gradient:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-            color: white !important;
-            opacity: 0.95;
-        }
+    .password-input {
+      padding-right: 50px !important;
+    }
 
-        .btn-primary-gradient:active {
-            transform: translateY(-1px) scale(0.98);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            opacity: 0.9;
-            color: white !important;
-        }
+    .password-toggle {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      z-index: 10;
+      padding: 5px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
 
-        .btn-outline-primary {
-            border: 2px solid var(--secondary);
-            color: var(--secondary);
-            border-radius: 16px;
-            font-weight: 600;
-            padding: 12px 28px;
-            transition: all 0.3s ease;
-            background: transparent;
-        }
+    .password-toggle:hover {
+      background: rgba(0, 0, 0, 0.05);
+      color: var(--secondary);
+    }
 
-        .btn-outline-primary:active {
-            transform: scale(0.98);
-            opacity: 0.85;
-            color: white !important;
-        }
+    .password-toggle:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+    }
 
-        .btn-outline-primary:hover {
-            background: var(--secondary-gradient);
-            border-color: transparent;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
-            color: white !important;
-            opacity: 0.95;
-        }
 
-        /* Social Login Buttons */
-        .social-btn {
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border-radius: 16px;
-            padding: 14px 18px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            font-size: 1.1rem;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    /* Button Styling */
+    .btn-primary-gradient {
+      background: var(--secondary-gradient);
+      border: none;
+      border-radius: 16px;
+      color: white !important;
+      font-weight: 600;
+      padding: 14px 32px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
 
-        .social-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            color: white;
-        }
+    .btn-primary-gradient:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+      color: white !important;
+      opacity: 0.95;
+    }
 
-        /* Alert Styling */
-        .alert {
-            border: none;
-            border-radius: 16px;
-            backdrop-filter: blur(10px);
-            font-weight: 500;
-        }
+    .btn-primary-gradient:active {
+      transform: translateY(-1px) scale(0.98);
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      opacity: 0.9;
+      color: white !important;
+    }
 
-        .alert-danger {
-            background: rgba(252, 129, 129, 0.1);
-            color: var(--danger);
-            border: 1px solid rgba(252, 129, 129, 0.2);
-        }
+    .btn-outline-primary {
+      border: 2px solid var(--secondary);
+      color: var(--secondary);
+      border-radius: 16px;
+      font-weight: 600;
+      padding: 12px 28px;
+      transition: all 0.3s ease;
+      background: transparent;
+    }
 
-        .alert-success {
-            background: rgba(72, 187, 120, 0.1);
-            color: var(--success);
-            border: 1px solid rgba(72, 187, 120, 0.2);
-        }
+    .btn-outline-primary:active {
+      transform: scale(0.98);
+      opacity: 0.85;
+      color: white !important;
+    }
 
-        .alert-info {
-            background: rgba(66, 153, 225, 0.1);
-            color: var(--info);
-            border: 1px solid rgba(66, 153, 225, 0.2);
-        }
+    .btn-outline-primary:hover {
+      background: var(--secondary-gradient);
+      border-color: transparent;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+      color: white !important;
+      opacity: 0.95;
+    }
 
-        /* Alert Styling */
-        .alert {
-            border: none;
-            border-radius: 12px;
-            backdrop-filter: blur(5px);
-        }
+    /* Social Login Buttons */
+    .social-btn {
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border-radius: 16px;
+      padding: 14px 18px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      font-size: 1.1rem;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        /* Loading Spinner */
-        .spinner-border-sm {
-            width: 1rem;
-            height: 1rem;
-        }
+    .social-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      color: white;
+    }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .auth-card {
-                margin: 20px;
-                border-radius: 15px;
-            }
+    /* Alert Styling */
+    .alert {
+      border: none;
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      font-weight: 500;
+    }
 
-            .logo-main {
-                width: 60px;
-                height: 60px;
-            }
-        }
+    .alert-danger {
+      background: rgba(252, 129, 129, 0.1);
+      color: var(--danger);
+      border: 1px solid rgba(252, 129, 129, 0.2);
+    }
 
-        /* Additional decorative elements */
-        .decorative-line {
-            height: 4px;
-            background: var(--primary-gradient);
-            border-radius: 2px;
-            margin: 1.5rem 0;
-        }
+    .alert-success {
+      background: rgba(72, 187, 120, 0.1);
+      color: var(--success);
+      border: 1px solid rgba(72, 187, 120, 0.2);
+    }
 
-        .feature-list {
-            list-style: none;
-            padding: 0;
-        }
+    .alert-info {
+      background: rgba(66, 153, 225, 0.1);
+      color: var(--info);
+      border: 1px solid rgba(66, 153, 225, 0.2);
+    }
 
-        .feature-list li {
-            padding: 0.5rem 0;
-            color: rgba(255, 255, 255, 0.9);
-        }
+    /* Alert Styling */
+    .alert {
+      border: none;
+      border-radius: 12px;
+      backdrop-filter: blur(5px);
+    }
 
-        .feature-list i {
-            color: #4facfe;
-            margin-right: 0.5rem;
-        }
+    /* Loading Spinner */
+    .spinner-border-sm {
+      width: 1rem;
+      height: 1rem;
+    }
 
-        /* Ensure button text color consistency */
-        .btn-primary-gradient,
-        .btn-primary-gradient:hover,
-        .btn-primary-gradient:active,
-        .btn-primary-gradient:focus {
-            color: white !important;
-        }
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .auth-card {
+        margin: 20px;
+        border-radius: 15px;
+      }
 
-        .btn-outline-primary:hover,
-        .btn-outline-primary:active,
-        .btn-outline-primary:focus {
-            color: white !important;
-        }
-    </style>
+      .logo-main {
+        width: 60px;
+        height: 60px;
+      }
+    }
 
-    @yield('styles')
+    /* Additional decorative elements */
+    .decorative-line {
+      height: 4px;
+      background: var(--primary-gradient);
+      border-radius: 2px;
+      margin: 1.5rem 0;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .feature-list li {
+      padding: 0.5rem 0;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .feature-list i {
+      color: #4facfe;
+      margin-right: 0.5rem;
+    }
+
+    /* Ensure button text color consistency */
+    .btn-primary-gradient,
+    .btn-primary-gradient:hover,
+    .btn-primary-gradient:active,
+    .btn-primary-gradient:focus {
+      color: white !important;
+    }
+
+    .btn-outline-primary:hover,
+    .btn-outline-primary:active,
+    .btn-outline-primary:focus {
+      color: white !important;
+    }
+  </style>
+
+  @yield('styles')
 </head>
+
 <body>
-    <!-- Animated Background -->
-    <div class="bg-animation">
-        <div class="floating-shape shape-1"></div>
-        <div class="floating-shape shape-2"></div>
-        <div class="floating-shape shape-3"></div>
-    </div>
+  <!-- Animated Background -->
+  <div class="bg-animation">
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+    <div class="floating-shape shape-3"></div>
+  </div>
 
-    <!-- Main Content -->
-    <div class="container-fluid d-flex align-items-center justify-content-center min-vh-100 position-relative">
-        @yield('content')
-    </div>
+  <!-- Main Content -->
+  <div class="container-fluid d-flex align-items-center justify-content-center min-vh-100 position-relative">
+    @yield('content')
+  </div>
 
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
-    <!-- Password Toggle Functionality -->
-    <script>
-        // Password toggle functionality
-        function initializePasswordToggles() {
-            // Main password toggle
-            const togglePassword = document.getElementById('togglePassword');
-            if (togglePassword) {
-                togglePassword.addEventListener('click', function() {
-                    const passwordInput = document.getElementById('password');
-                    const eyeIcon = document.getElementById('eyeIcon');
+  <!-- Password Toggle Functionality -->
+  <script>
+    // Password toggle functionality
+    function initializePasswordToggles() {
+      // Main password toggle
+      const togglePassword = document.getElementById('togglePassword');
+      if (togglePassword) {
+        togglePassword.addEventListener('click', function() {
+          const passwordInput = document.getElementById('password');
+          const eyeIcon = document.getElementById('eyeIcon');
 
-                    if (passwordInput && eyeIcon) {
-                        if (passwordInput.type === 'password') {
-                            passwordInput.type = 'text';
-                            eyeIcon.classList.remove('fa-eye');
-                            eyeIcon.classList.add('fa-eye-slash');
-                        } else {
-                            passwordInput.type = 'password';
-                            eyeIcon.classList.remove('fa-eye-slash');
-                            eyeIcon.classList.add('fa-eye');
-                        }
-                    }
-                });
+          if (passwordInput && eyeIcon) {
+            if (passwordInput.type === 'password') {
+              passwordInput.type = 'text';
+              eyeIcon.classList.remove('fa-eye');
+              eyeIcon.classList.add('fa-eye-slash');
+            } else {
+              passwordInput.type = 'password';
+              eyeIcon.classList.remove('fa-eye-slash');
+              eyeIcon.classList.add('fa-eye');
             }
+          }
+        });
+      }
 
-            // Confirm password toggle
-            const togglePasswordConfirm = document.getElementById('togglePasswordConfirm');
-            if (togglePasswordConfirm) {
-                togglePasswordConfirm.addEventListener('click', function() {
-                    const passwordConfirmInput = document.getElementById('password_confirmation');
-                    const eyeIconConfirm = document.getElementById('eyeIconConfirm');
+      // Confirm password toggle
+      const togglePasswordConfirm = document.getElementById('togglePasswordConfirm');
+      if (togglePasswordConfirm) {
+        togglePasswordConfirm.addEventListener('click', function() {
+          const passwordConfirmInput = document.getElementById('password_confirmation');
+          const eyeIconConfirm = document.getElementById('eyeIconConfirm');
 
-                    if (passwordConfirmInput && eyeIconConfirm) {
-                        if (passwordConfirmInput.type === 'password') {
-                            passwordConfirmInput.type = 'text';
-                            eyeIconConfirm.classList.remove('fa-eye');
-                            eyeIconConfirm.classList.add('fa-eye-slash');
-                        } else {
-                            passwordConfirmInput.type = 'password';
-                            eyeIconConfirm.classList.remove('fa-eye-slash');
-                            eyeIconConfirm.classList.add('fa-eye');
-                        }
-                    }
-                });
+          if (passwordConfirmInput && eyeIconConfirm) {
+            if (passwordConfirmInput.type === 'password') {
+              passwordConfirmInput.type = 'text';
+              eyeIconConfirm.classList.remove('fa-eye');
+              eyeIconConfirm.classList.add('fa-eye-slash');
+            } else {
+              passwordConfirmInput.type = 'password';
+              eyeIconConfirm.classList.remove('fa-eye-slash');
+              eyeIconConfirm.classList.add('fa-eye');
             }
-        }
+          }
+        });
+      }
+    }
 
-        // Initialize when DOM is ready
-        document.addEventListener('DOMContentLoaded', initializePasswordToggles);
-    </script>
+    // Alert close functionality
+    function initializeAlertCloseButtons() {
+      // Get all alert close buttons
+      const closeButtons = document.querySelectorAll('[data-bs-dismiss="alert"]');
 
-    @yield('scripts')
+      closeButtons.forEach(function(button) {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          const alert = this.closest('.alert');
+          if (alert) {
+            alert.style.transition = 'opacity 0.3s ease-out';
+            alert.style.opacity = '0';
+            setTimeout(function() {
+              alert.remove();
+            }, 300);
+          }
+        });
+      });
+    }
+
+    // Initialize when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      initializePasswordToggles();
+      initializeAlertCloseButtons();
+    });
+  </script>
+
+  @yield('scripts')
 </body>
+
 </html>
