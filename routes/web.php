@@ -1,17 +1,20 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/', function () {
-  return redirect()->route('auth.login');
+  return redirect()->route('login');
 });
+
+Route::middleware(['guest'])->get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 
 // !Authentication Routes
 Route::prefix('auth')->name('auth.')->group(function () {
   // ! Login Routes
-  Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
   Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
   Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -25,9 +28,20 @@ Route::prefix('auth')->name('auth.')->group(function () {
   Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
-// Protected Routes (require authentication)
 Route::middleware(['auth'])->group(function () {
-  Route::get('/dashboard', function () {
-    return view('dashboard');
-  })->name('dashboard');
+  Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+  
+  Route::get('/has-password', function (Request $request) {
+    if (config('app.env') === 'production') {
+      return response()->json(['error' => 'This route is only available in non-production environments'], 403);
+    }
+
+    $password = $request->get('password');
+    if ($password === null) {
+      return response()->json(['error' => 'Password parameter is missing'], 400);
+    }
+
+    return password_hash($password, PASSWORD_DEFAULT);
+  });
 });
+

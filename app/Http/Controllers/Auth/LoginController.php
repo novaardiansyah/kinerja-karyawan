@@ -231,7 +231,7 @@ class LoginController extends Controller
 
     $request->session()->regenerateToken();
 
-    return redirect()->route('auth.login')
+    return redirect()->route('login')
       ->with('success', 'Anda telah berhasil logout. Sampai jumpa kembali!');
   }
 

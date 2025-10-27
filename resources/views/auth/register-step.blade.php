@@ -384,7 +384,7 @@
         <div class="text-center">
           <p class="mb-0 d-lg-block">
             <span class="d-lg-inline">Sudah punya akun?</span>
-            <a href="{{ route('auth.login') }}" class="text-decoration-none fw-semibold d-lg-inline">
+            <a href="{{ route('login') }}" class="text-decoration-none fw-semibold d-lg-inline">
               <span class="d-lg-none"><br></span>
               Masuk di sini
               <i class="fas fa-arrow-right ms-1"></i>
