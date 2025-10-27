@@ -23,9 +23,6 @@ Route::prefix('auth')->name('auth.')->group(function () {
   Route::post('/register/step1', [RegisterController::class, 'registerStep1'])->name('register.step1');
   Route::post('/register/step2', [RegisterController::class, 'registerStep2'])->name('register.step2');
   Route::post('/register/step3', [RegisterController::class, 'registerStep3'])->name('register.step3');
-
-  // ! Logout  Routes
-  Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
 Route::middleware(['auth'])->group(function () {
