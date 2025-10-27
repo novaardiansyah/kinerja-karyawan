@@ -68,13 +68,13 @@
             <i class="fas fa-chart-line fa-1x text-white" style="font-size: 1.2rem;"></i>
           </div>
           <h3 class="fw-bold text-primary mb-2">Portal Kinerja</h3>
-          <p class="text-muted small">Selamat datang kembali! Masuk ke sistem kinerja karyawan</p>
+          <p class="text-muted small">Selamat datang kembali!<br> Masuk ke sistem kinerja karyawan</p>
         </div>
 
         <!-- Desktop Header -->
         <div class="d-none d-lg-block text-center mb-5">
           <h2 class="fw-bold mb-2 text-primary">Portal Kinerja</h2>
-          <p class="text-muted">Selamat datang kembali! Masuk ke sistem kinerja karyawan</p>
+          <p class="text-muted">Selamat datang kembali!<br> Masuk ke sistem kinerja karyawan</p>
         </div>
 
         <!-- Flash Messages -->
